@@ -56,9 +56,9 @@ button {
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+  display: grid;
+  justify-items: start;
+  gap: 10px;
   padding: 8px 0 20px;
 }
 
@@ -70,7 +70,6 @@ button {
   color: #fffaf1;
   display: grid;
   place-items: center;
-  flex: 0 0 auto;
 }
 
 .eyebrow {
@@ -123,18 +122,54 @@ h2 {
   overflow-wrap: anywhere;
 }
 
+.category-summary {
+  margin-top: 18px;
+}
+
+.summary-list {
+  display: grid;
+  gap: 8px;
+}
+
+.summary-list p {
+  min-height: 58px;
+  border-radius: 8px;
+  background: #fffdf8;
+  border: 2px solid #eadcc9;
+  padding: 12px 14px;
+  display: grid;
+  gap: 3px;
+}
+
+.summary-list span {
+  color: #6d5b4d;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.summary-list strong {
+  color: #24594f;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
 .entry-form {
   margin-top: 18px;
   display: grid;
   gap: 14px;
 }
 
-label {
-  display: grid;
-  gap: 8px;
+label,
+legend {
   color: #4d4037;
   font-size: 1.1rem;
   font-weight: 800;
+}
+
+label {
+  display: grid;
+  gap: 8px;
 }
 
 input {
@@ -154,22 +189,69 @@ input:focus {
   box-shadow: 0 0 0 4px rgba(36, 89, 79, 0.16);
 }
 
-.add-button {
+.category-picker {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.category-picker legend {
+  padding: 0 0 8px;
+}
+
+.category-button {
   width: 100%;
-  min-height: 72px;
+  min-height: 58px;
   border-radius: 8px;
+  background: #fffdf8;
+  color: #3c3029;
+  border: 2px solid #d9c6ad;
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.category-button.active {
+  background: #e6f0e7;
+  border-color: #24594f;
+  color: #163f39;
+}
+
+.add-button,
+.cancel-button,
+.edit-button,
+.delete-button {
+  width: 100%;
+  min-height: 64px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  font-weight: 900;
+}
+
+.add-button {
+  min-height: 72px;
   background: #24594f;
   color: #fffaf1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
   font-size: 1.35rem;
-  font-weight: 900;
   box-shadow: 0 12px 24px rgba(36, 89, 79, 0.22);
 }
 
+.cancel-button {
+  background: #efe4d6;
+  color: #4d4037;
+  font-size: 1.2rem;
+}
+
+.category-button:active,
 .add-button:active,
+.cancel-button:active,
+.edit-button:active,
 .delete-button:active {
   transform: translateY(1px);
 }
@@ -197,7 +279,7 @@ input:focus {
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .food-item {
@@ -205,22 +287,25 @@ input:focus {
   border-radius: 8px;
   background: #fffdf8;
   border: 2px solid #eadcc9;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  padding: 14px;
+  display: grid;
+  gap: 8px;
 }
 
-.food-item > div {
-  min-width: 0;
-  flex: 1;
-  display: grid;
-  gap: 4px;
+.category-label {
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 8px;
+  background: #e6f0e7;
+  color: #163f39;
+  padding: 6px 10px;
+  font-size: 1rem;
+  font-weight: 900;
 }
 
 .food-name {
   color: #2c241f;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   line-height: 1.22;
   font-weight: 900;
   overflow-wrap: anywhere;
@@ -228,20 +313,27 @@ input:focus {
 
 .food-price {
   color: #24594f;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   line-height: 1.2;
   font-weight: 900;
 }
 
+.item-actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.edit-button {
+  background: #e8ecf4;
+  color: #203e6b;
+  font-size: 1.15rem;
+}
+
 .delete-button {
-  width: 56px;
-  height: 56px;
-  border-radius: 8px;
   background: #f1e3d1;
   color: #6f312a;
-  display: grid;
-  place-items: center;
-  flex: 0 0 auto;
+  font-size: 1.15rem;
 }
 
 @media (orientation: landscape) {
