@@ -252,8 +252,62 @@ input:focus {
 .add-button:active,
 .cancel-button:active,
 .edit-button:active,
-.delete-button:active {
+.delete-button:active,
+.search-result button:active {
   transform: translateY(1px);
+}
+
+.search-area {
+  margin-top: 26px;
+  display: grid;
+  gap: 12px;
+}
+
+.search-result {
+  min-height: 72px;
+  border-radius: 8px;
+  background: #fffdf8;
+  border: 2px solid #eadcc9;
+  padding: 14px;
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.search-result svg {
+  color: #24594f;
+}
+
+.search-result p {
+  display: grid;
+  gap: 3px;
+}
+
+.search-result span {
+  color: #6d5b4d;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.search-result strong {
+  color: #24594f;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  font-weight: 900;
+}
+
+.search-result button {
+  width: 100%;
+  min-height: 58px;
+  border-radius: 8px;
+  background: #efe4d6;
+  color: #4d4037;
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+  font-weight: 900;
 }
 
 .list-area {

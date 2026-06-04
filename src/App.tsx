@@ -1,5 +1,5 @@
 import { FormEvent, useMemo, useState } from 'react';
-import { Check, Pencil, Plus, Trash2, Utensils, X } from 'lucide-react';
+import { Check, Pencil, Plus, Search, Trash2, Utensils, X } from 'lucide-react';
 
 type Category = '野菜' | '肉・魚' | '主食' | '調味料' | 'その他';
 
@@ -50,10 +50,28 @@ export function App() {
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState<Category>('野菜');
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [searchText, setSearchText] = useState('');
 
   const total = useMemo(
     () => items.reduce((sum, item) => sum + item.price, 0),
     [items],
+  );
+
+  const filteredItems = useMemo(() => {
+    const keyword = searchText.trim().toLowerCase();
+
+    if (!keyword) {
+      return items;
+    }
+
+    return items.filter((item) =>
+      `${item.name} ${item.category}`.toLowerCase().includes(keyword),
+    );
+  }, [items, searchText]);
+
+  const filteredTotal = useMemo(
+    () => filteredItems.reduce((sum, item) => sum + item.price, 0),
+    [filteredItems],
   );
 
   const categoryTotals = useMemo(
@@ -136,6 +154,8 @@ export function App() {
       resetForm();
     }
   };
+
+  const hasSearch = searchText.trim().length > 0;
 
   return (
     <main className="app" aria-label="food-labo">
@@ -220,14 +240,43 @@ export function App() {
           )}
         </form>
 
+        <section className="search-area" aria-label="検索">
+          <label>
+            検索
+            <input
+              value={searchText}
+              onChange={(event) => setSearchText(event.target.value)}
+              placeholder="食材名・分類で検索"
+              autoComplete="off"
+              inputMode="search"
+            />
+          </label>
+
+          {hasSearch && (
+            <div className="search-result">
+              <Search size={24} aria-hidden="true" />
+              <p>
+                <span>{filteredItems.length}件</span>
+                <strong>{yen(filteredTotal)}</strong>
+              </p>
+              <button type="button" onClick={() => setSearchText('')}>
+                <X size={24} />
+                クリア
+              </button>
+            </div>
+          )}
+        </section>
+
         <section className="list-area" aria-label="記録一覧">
-          <h2>今日の記録</h2>
+          <h2>{hasSearch ? '検索結果' : '今日の記録'}</h2>
 
           {items.length === 0 ? (
             <p className="empty">まだ記録がありません。</p>
+          ) : filteredItems.length === 0 ? (
+            <p className="empty">見つかりませんでした。</p>
           ) : (
             <ul className="food-list">
-              {items.map((item) => (
+              {filteredItems.map((item) => (
                 <li className="food-item" key={item.id}>
                   <span className="category-label">{item.category}</span>
                   <span className="food-name">{item.name}</span>
